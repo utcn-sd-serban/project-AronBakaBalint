@@ -3,9 +3,11 @@ package aron.utcn.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import aron.utcn.dto.PersonRemoverDto;
 import aron.utcn.dto.StudentDto;
 import aron.utcn.service.PersonManagementService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +23,9 @@ public class StudentController {
 		return personManagementService.findAllStudents();
 	}
 	
-	@GetMapping("/studentList/remove")
-	public List<StudentDto> removeStudent(@RequestBody StudentDto studentDto){
-		return null;
+	@PostMapping("/studentList/remove")
+	public List<StudentDto> removeStudent(@RequestBody PersonRemoverDto personRemoverDto){
+		personManagementService.deletePerson(personRemoverDto.getUsername(), personRemoverDto.getId());
+		return personManagementService.findAllStudents();
 	}
 }

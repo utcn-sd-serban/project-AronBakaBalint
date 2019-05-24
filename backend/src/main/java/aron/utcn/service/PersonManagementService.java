@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import aron.utcn.dto.StudentDto;
+import aron.utcn.exceptions.NotPrincipalException;
 import aron.utcn.exceptions.NotStudentException;
 import aron.utcn.exceptions.NotTeacherException;
 import aron.utcn.exceptions.PersonNotFoundException;
@@ -32,9 +33,14 @@ public class PersonManagementService {
 	}
 	
 	@Transactional
-	public void deletePerson(int id) {
-		Person person = personRepository.getPersonById(id).orElseThrow(PersonNotFoundException::new);
-		personRepository.delete(person);
+	public void deletePerson(String username, int id) {
+		String role = getRoleByPersonName(username);
+		if(role.equals("principal")) {
+			Person person = personRepository.getPersonById(id).orElseThrow(PersonNotFoundException::new);
+			personRepository.delete(person);
+		} else {
+			throw new NotPrincipalException();
+		}
 	}
 	
 	@Transactional
@@ -96,6 +102,11 @@ public class PersonManagementService {
 	@Transactional
 	public String getTeacherBySubject(String subject) {
 		return personRepository.findAll().stream().filter(p->p.getRole().equals(subject)).collect(Collectors.toList()).get(0).getUsername();
+	}
+	
+	@Transactional
+	public String getRoleByPersonName(String username) {
+		return personRepository.findAll().stream().filter(p->p.getUsername().equals(username)).collect(Collectors.toList()).get(0).getRole();
 	}
 	
 	private boolean isTeacher(Person person) {

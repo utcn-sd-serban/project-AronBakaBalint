@@ -7,6 +7,7 @@ import lombok.Data;
 public class MarkDto {
 
 	private int id;
+	private String teacherName;
 	private String studentName;
 	private String subject;
 	private int value;

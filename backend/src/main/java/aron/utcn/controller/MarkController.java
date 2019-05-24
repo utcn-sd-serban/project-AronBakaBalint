@@ -24,9 +24,9 @@ public class MarkController {
 		return personManagementService.findStudentById(studentid);
 	}
 	
-	@PostMapping("/addMark/{username}")
-	public List<StudentDto> addMark(@RequestBody MarkDto markDto, @PathVariable String username){
-		personManagementService.markStudent(username, markDto.getId(), markDto.getValue());
+	@PostMapping("/addMark")
+	public List<StudentDto> addMark(@RequestBody MarkDto markDto){
+		personManagementService.markStudent(markDto.getTeacherName(), markDto.getId(), markDto.getValue());
 		return personManagementService.findAllStudents();
 	}
 }

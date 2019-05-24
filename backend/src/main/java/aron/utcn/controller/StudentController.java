@@ -3,6 +3,7 @@ package aron.utcn.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import aron.utcn.dto.StudentDto;
@@ -18,5 +19,10 @@ public class StudentController {
 	@GetMapping("/studentList")
 	public List<StudentDto> getStudents(){
 		return personManagementService.findAllStudents();
+	}
+	
+	@GetMapping("/studentList/remove")
+	public List<StudentDto> removeStudent(@RequestBody StudentDto studentDto){
+		return null;
 	}
 }

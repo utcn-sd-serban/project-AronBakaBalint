@@ -15,7 +15,6 @@ public class MarkDto {
 		MarkDto markDto = new MarkDto();
 		markDto.setId(mark.getId());
 		markDto.setStudentName(mark.getStudentName());
-		markDto.setSubject(mark.getSubject());
 		markDto.setValue(mark.getValue());
 		
 		return markDto;

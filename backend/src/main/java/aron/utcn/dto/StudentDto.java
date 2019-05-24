@@ -36,13 +36,13 @@ public class StudentDto {
 		Map<String, List<Integer>> combinedMarks = new HashMap<>();
 		
 		for(Mark mark: markList) {
-			String subject = mark.getSubject();
+			String teacherName = mark.getSubject();
 			int markValue = mark.getValue();
 			
-			if(!combinedMarks.containsKey(subject)) {
-				combinedMarks.put(subject, new ArrayList<>());
+			if(!combinedMarks.containsKey(teacherName)) {
+				combinedMarks.put(teacherName, new ArrayList<>());
 			}
-			combinedMarks.get(subject).add(markValue);
+			combinedMarks.get(teacherName).add(markValue);
 		}
 		
 		return combinedMarks;

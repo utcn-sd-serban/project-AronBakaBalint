@@ -32,6 +32,7 @@ public class StudentDto {
 			combinedMarks.forEach((K,V)->{
 				markList.add(K+": ");
 				markList.add(V.toString());
+				markList.add(" Average: "+calculateAverage(V));
 				markList.add("\n");
 			});
 			
@@ -42,6 +43,15 @@ public class StudentDto {
 		studentDto.setMarks(marksToString);
 		
 		return studentDto;
+	}
+	
+	private static int calculateAverage(List<Integer> markList) {
+		int sum = 0;
+		for(Integer i: markList) {
+			sum += i;
+		}
+		
+		return Math.round((float)sum/markList.size());
 	}
 	
 	private static Map<String, List<Integer>> combineMarksWithSubjects(List<Mark> markList){

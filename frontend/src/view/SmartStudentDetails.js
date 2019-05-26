@@ -3,15 +3,15 @@ import model from "../model/model";
 
 import StudentDetails from "./StudentDetails";
 
-const mapModelStateToComponentState = (modelState, props) => (
-    modelState.students[props.match.params.index]
-)
+const mapModelStateToComponentState = modelState => ({
+    subjects: modelState.subjects
+});
 
 export default class SmartStudentDetails extends Component {
-    constructor(props) {
-        super(props);
-        this.state = mapModelStateToComponentState(model.state, props);
-        this.listener = modelState => this.setState(mapModelStateToComponentState(modelState, this.props));
+    constructor() {
+        super();
+        this.state = mapModelStateToComponentState(model.state);
+        this.listener = modelState => this.setState(mapModelStateToComponentState(modelState));
         model.addListener("change", this.listener);
     }
 
@@ -28,12 +28,7 @@ export default class SmartStudentDetails extends Component {
     render() {
         return (
             <StudentDetails
-                id={this.state.id}
-                title={this.state.title}
-                body={this.state.body}
-                tags={this.state.tags}
-                author={this.state.author}
-                postDate={this.state.postDate}
+                subjects={this.state.subjects}
             />
         );
     }

@@ -16,6 +16,7 @@ class StudentsListPresenter {
 
     onViewDetails(index) {
         window.location.assign("#/student-details/" + index);
+        model.getStudentDetails(index);
     }
 }
 

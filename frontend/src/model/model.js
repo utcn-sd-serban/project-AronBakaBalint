@@ -9,7 +9,7 @@ class Model extends EventEmitter {
         super();
         this.state = {
             user: "",
-            studentId: 3,
+            subjects: [],
             students: [],
             newStudent: {
                 name: "",
@@ -25,7 +25,16 @@ class Model extends EventEmitter {
                 students: students
             };
             this.emit("change", this.state);
-            console.log(students);
+        })
+    }
+
+    getStudentDetails(studentid){
+        return client.getStudentDetails(studentid).then(subjects => {
+            this.state = {
+                ...this.state,
+                subjects: subjects
+            };
+            this.emit("change", this.state);
         })
     }
 

@@ -14,6 +14,15 @@ export default class RestClient{
         }).then(response => response.json());
     }
 
+    getStudentDetails(studentid){
+        return fetch(BASE_URL+"/studentList/details?id="+studentid, {
+            method: "GET",
+            headers: {
+                "Authorization": this.authorization
+            }
+        }).then(response => response.json());
+    }
+
     createStudent(username, password){
         return fetch(BASE_URL+"/question-list", {
             method: "POST",

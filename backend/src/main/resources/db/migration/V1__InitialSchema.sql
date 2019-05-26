@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS person
 (
 		personid serial PRIMARY KEY,
 		username VARCHAR(16) NOT NULL,
-		password VARCHAR(16) NOT NULL,
+		password VARCHAR(64) NOT NULL,
 		role VARCHAR(12) NOT NULL	
 );
 

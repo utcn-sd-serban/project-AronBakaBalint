@@ -1,17 +1,22 @@
 import React from "react";
 
-const CreateStudent = ({ name, grade, onCreate, onChange }) => (
+const CreateStudent = ({ onCreate, onChange }) => (
     <div className="container">
-        <h2>Add Student</h2>
+        <h2>Add Person</h2>
             <div className="form-group">
                 <label>Name: </label>
-                <input value={name} 
+                <input 
                     onChange={ e => onChange("name", e.target.value) } />
             </div>
             <div className="form-group">
-                <label>Grade: </label>
-                <input value={grade} 
-                    onChange={ e => onChange("grade", e.target.value) } />
+                <label>Passw: </label>
+                <input 
+                    onChange={ e => onChange("password", e.target.value) } />
+            </div>
+            <div className="form-group">
+                <label>Role: </label>
+                <input 
+                    onChange={ e => onChange("role", e.target.value) } />
             </div>
             <button className="btn btn-secondary" onClick={onCreate}>Add</button>
     </div>

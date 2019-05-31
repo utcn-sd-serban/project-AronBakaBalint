@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import model from "../model/model";
 
 import StudentDetails from "./StudentDetails";
+import studentsListPresenter from "../presenter/studentsListPresenter";
 
 const mapModelStateToComponentState = modelState => ({
-    subjects: modelState.subjects
+    subjects: modelState.subjects,
+    marks: modelState.marks
 });
 
 export default class SmartStudentDetails extends Component {
@@ -28,7 +30,9 @@ export default class SmartStudentDetails extends Component {
     render() {
         return (
             <StudentDetails
-                subjects={this.state.subjects}
+            subjects={this.state.subjects}
+            marks={this.state.marks}
+            onMarkStudent={studentsListPresenter.onMarkStudent}
             />
         );
     }

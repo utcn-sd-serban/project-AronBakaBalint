@@ -1,11 +1,24 @@
 import React from "react";
+import model from "../model/model";
 
-const StudentDetails = ({ subjects }) => (
+const StudentDetails = ({ subjects, onMarkStudent, marks }) => (
     <div>
-        <span>{ subjects.marks }</span>
+        <span>{subjects.username}</span>
         <br/>
-        <input onChange={ e => {}} id="inputField"></input>
-        <button onClick={() => {}}>Mark</button>
+        <ul>
+        {
+            marks.map((mark, index) => (
+                <div key={index}>
+                {
+                        mark
+                }
+                </div>
+            ))
+        }
+        </ul>
+        <br/>
+        <input onChange={ e => {model.setMark(e.target.value)}}></input>
+        <button onClick={() => {model.markStudent(); onMarkStudent()}}>Mark</button>
         <br/>
         <br/>
     </div>

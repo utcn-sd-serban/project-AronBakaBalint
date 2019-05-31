@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Student extends Person{
 
-	List<Mark> marks = new ArrayList<>();
+	private List<Mark> marks = new ArrayList<>();
 	
 	public Student(int id, String username, String password) {
 		super(id, username, password, "student");

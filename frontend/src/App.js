@@ -8,6 +8,7 @@ import SmartCreateStudent from './view/SmartCreateStudent';
 import SmartStudentDetails from './view/SmartStudentDetails';
 import SmartFilterResult from './view/SmartFilterResult';
 import SmartLogin from './view/SmartLogin';
+import SmartAddParent from './view/SmartAddParent'
 
 const App = () => (
   <div className="App">
@@ -18,6 +19,7 @@ const App = () => (
         <Route exact={true} component={SmartCreateStudent} path="/create-student" />
         <Route exact={true} component={SmartStudentDetails} path="/student-details/:index" />
         <Route exact={true} component={SmartFilterResult} path="/filter-result" />
+        <Route exact={true} component={SmartAddParent} path="/add-parent" />
       </Switch>
     </HashRouter>
   </div>

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import model from "../model/model";
 
-import CreateStudent from "./CreateStudent";
-import createStudentPresenter from "../presenter/createStudentPresenter";
+import AddParent from "../view/AddParent";
+import addParentPresenter from "../presenter/addParentPresenter";
 
 const mapModelStateToComponentState = modelState => ({
     students: modelState.students,
@@ -22,9 +22,9 @@ export default class SmartCreateStudent extends Component {
 
     render() {
         return (
-            <CreateStudent
-                onCreate={createStudentPresenter.onCreateStudent}
-                onChange={createStudentPresenter.onStudentChange} />
+            <AddParent
+                onAddParent={addParentPresenter.onAddParent}
+                />
         );
     }
 }

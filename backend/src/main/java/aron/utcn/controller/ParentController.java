@@ -1,25 +1,22 @@
 package aron.utcn.controller;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import aron.utcn.dto.MarkDto;
-import aron.utcn.dto.PersonDto;
+import aron.utcn.dto.ParentDto;
 import aron.utcn.service.PersonManagementService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class MarkController {
-
+public class ParentController {
+	
 	private final PersonManagementService personManagementService;
 	
-	@PostMapping("/mark")
-	public List<PersonDto> addMark(@RequestBody MarkDto markDto){
-		personManagementService.markStudent(markDto.getTeacherName(), markDto.getId(), markDto.getValue());
-		return personManagementService.findAll();
+	@PostMapping("/parent")
+	public void addParent(@RequestBody ParentDto parentDto) {
+		personManagementService.addParent(parentDto.getChildName(), parentDto.getParentName());
 	}
+
 }

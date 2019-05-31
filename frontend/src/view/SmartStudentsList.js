@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import model from "../model/model";
 import StudentsList from "./StudentsList";
-import studentsListPresenter from "../presenter/studentsListPresenter";
+import studentsListPresenter from "../presenter/studentsListPresenter"
+
 
 const mapModelStateToComponentState = modelState => ({
     students: modelState.students
@@ -25,9 +26,9 @@ export default class SmartStudentsList extends Component {
             <StudentsList 
                 onViewDetails={studentsListPresenter.onViewDetails}
                 onCreateStudent={studentsListPresenter.onCreateStudent}
-                onFilterByTag={studentsListPresenter.onFilterByTag}
-                onFilterByTitle={studentsListPresenter.onFilterByTitle}
-                students={this.state.students}/>
+                onDismissStudent={studentsListPresenter.onDismissStudent}
+                students={this.state.students}
+                onAddParent={studentsListPresenter.onAddParent}/>
         );
     }
 }

@@ -4,7 +4,8 @@ import FilterResult from "./FilterResult";
 import studentsListPresenter from "../presenter/studentsListPresenter";
 
 const mapModelStateToComponentState = modelState => ({
-    questions: modelState.questions
+    students: modelState.students,
+    searchWord: modelState.searchWord
 });
 
 export default class SmartFilterResult extends Component {
@@ -24,8 +25,11 @@ export default class SmartFilterResult extends Component {
         return (
             
             <FilterResult 
-                onViewDetails={studentsListPresenter.onViewDetails}
-                questions={this.filterByTag(this.state.questions, model.getSearchWord())} />
+            onViewDetails={studentsListPresenter.onViewDetails}
+            onCreateStudent={studentsListPresenter.onCreateStudent}
+            onFilter={studentsListPresenter.onFilter}
+            onDismissStudent={studentsListPresenter.onDismissStudent}
+            students={this.state.students} />
         );
     }
 

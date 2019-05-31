@@ -30,10 +30,15 @@ public class Seed implements CommandLineRunner {
 			personManagementService.addPerson(new Person(0, "johnwick", passwordEncoder.encode("11oneone"), "student"));
 			personManagementService.addPerson(new Person(0, "caitwin", passwordEncoder.encode("11oneone"), "student"));
 			personManagementService.addPerson(new Person(0, "rosemary", passwordEncoder.encode("11oneone"), "student"));
+			personManagementService.addPerson(new Person(0, "jackjohnson", passwordEncoder.encode("11oneone"), "parent"));
 			
 			personManagementService.markStudent("katewhite", 4, 9);
 			personManagementService.markStudent("katewhite", 4, 10);
 			personManagementService.markStudent("katewhite", 4, 10);
+			personManagementService.markStudent("jamesblanket", 4, 7);
+			
+			personManagementService.addParent("aronbaka", "jackjohnson");
+			personManagementService.addParent("caitwin", "jackjohnson");
 			
 		}
 	}

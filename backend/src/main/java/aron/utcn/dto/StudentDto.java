@@ -18,29 +18,22 @@ public class StudentDto {
 	private String username;
 	private String password;
 	private String role = "student"; // principal/subject/parent/student
-	private String marks = "";
+	private List<String> marks = new ArrayList<>();
 	
 	public static StudentDto ofEntity(Student student) {
 		StudentDto studentDto = new StudentDto();
 		studentDto.setId(student.getId());
 		studentDto.setUsername(student.getUsername());
 		studentDto.setPassword(student.getPassword());
-		String marksToString = "";
+		
 		if(!CollectionUtils.isEmpty(student.getMarks())) {
 			Map<String, List<Integer>> combinedMarks = combineMarksWithSubjects(student.getMarks());
 			List<String> markList = new ArrayList<>();
 			combinedMarks.forEach((K,V)->{
-				markList.add(K+": ");
-				markList.add(V.toString());
-				markList.add(" Average: "+calculateAverage(V));
-				markList.add("\n");
+				markList.add(K+": "+V.toString()+" Average: "+calculateAverage(V));
 			});
-			
-			for(String s: markList) {
-				marksToString+=s;
-			}
+			studentDto.setMarks(markList);
 		}
-		studentDto.setMarks(marksToString);
 		
 		return studentDto;
 	}

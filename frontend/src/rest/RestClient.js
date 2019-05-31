@@ -6,7 +6,16 @@ export default class RestClient{
     }
 
     loadStudents(){
-        return fetch(BASE_URL+"/studentList", {
+        return fetch(BASE_URL+"/persons", {
+            method: "GET",
+            headers: {
+                "Authorization": this.authorization
+            }
+        }).then(response => response.json());
+    }
+
+    filterByName(word){
+        return fetch(BASE_URL+"/persons/filter?word="+word, {
             method: "GET",
             headers: {
                 "Authorization": this.authorization
@@ -15,7 +24,7 @@ export default class RestClient{
     }
 
     getStudentDetails(studentid){
-        return fetch(BASE_URL+"/studentList/details?id="+studentid, {
+        return fetch(BASE_URL+"/students/details?id="+studentid, {
             method: "GET",
             headers: {
                 "Authorization": this.authorization
@@ -23,14 +32,13 @@ export default class RestClient{
         }).then(response => response.json());
     }
 
-    createStudent(username, password){
-        return fetch(BASE_URL+"/question-list", {
+    addPerson(username, password, role){
+        return fetch(BASE_URL+"/persons", {
             method: "POST",
             body: JSON.stringify({
-                id: 0,
                 username: username,
                 password: password,
-                role: "student"
+                role: role
             }),
             headers: {
                 "Authorization": this.authorization,
@@ -39,14 +47,13 @@ export default class RestClient{
         }).then(response => response.json());
     }
 
-    createTeacher(username, password, subject){
-        return fetch(BASE_URL+"/question-list", {
+    markStudent(username, mark, studentid){
+        return fetch(BASE_URL+"/mark", {
             method: "POST",
             body: JSON.stringify({
-                id: 0,
-                username: username,
-                password: password,
-                role: subject
+                id: studentid,
+                teacherName: username,
+                value: mark
             }),
             headers: {
                 "Authorization": this.authorization,
@@ -55,16 +62,9 @@ export default class RestClient{
         }).then(response => response.json());
     }
 
-    createParent(username, password){
-        return fetch(BASE_URL+"/question-list", {
-            method: "POST",
-            body: JSON.stringify({
-                id: 0,
-                username: username,
-                password: password,
-                role: "parent",
-                children: []
-            }),
+    dismissStudent(studentid){
+        return fetch(BASE_URL+"/persons/remove?id="+studentid, {
+            method: "DELETE",
             headers: {
                 "Authorization": this.authorization,
                 "Content-Type":  "application/json"
@@ -72,12 +72,17 @@ export default class RestClient{
         }).then(response => response.json());
     }
 
-    getDetailsById(id){
-        return fetch(BASE_URL+"/person-details/getDetails?id="+id, {
-            method: "GET",
+    addParent(parent, child){
+        fetch(BASE_URL+"/parent", {
+            method: "POST",
+            body: JSON.stringify({
+                childName: child,
+                parentName: parent
+            }),
             headers: {
-                "Authorization": this.authorization
+                "Authorization": this.authorization,
+                "Content-Type":  "application/json"
             }
-        }).then(response => response.json());
+        });
     }
 }

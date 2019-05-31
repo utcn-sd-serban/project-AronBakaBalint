@@ -13,3 +13,10 @@ CREATE TABLE IF NOT EXISTS marks
 		subject VARCHAR(14) NOT NULL,
 		mark INTEGER NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS parents
+(
+		relid serial PRIMARY KEY,
+		parentname VARCHAR(16) NOT NULL,
+		childname VARCHAR(16) NOT NULL
+);

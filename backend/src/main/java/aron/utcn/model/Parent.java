@@ -26,9 +26,5 @@ public class Parent extends Person{
 		children.add(student);
 	}
 	
-	
-	public void viewMarks() {
-		
-	}
 
 }

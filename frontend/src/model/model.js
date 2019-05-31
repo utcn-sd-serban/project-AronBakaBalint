@@ -1,24 +1,30 @@
 import { EventEmitter } from "events";
 import RestClient from "../rest/RestClient";
 
-const client = new RestClient("johndoe", "abc123");
-
 class Model extends EventEmitter {
 
     constructor() {
         super();
         this.state = {
             user: "",
-            subjects: [],
+            password: "",
+            studentid: "",
+            childname: "",
+            subjects: "",
+            parent: "",
+            marks:[],
             students: [],
+            mark: "",
             newStudent: {
                 name: "",
-                grade: ""
+                password: "",
+                role: ""
             }
         };
     }
 
     loadStudents(){
+        const client = new RestClient(this.state.user, this.state.password);
         return client.loadStudents().then(students => {
             this.state = {
                 ...this.state,
@@ -29,7 +35,20 @@ class Model extends EventEmitter {
     }
 
     getStudentDetails(studentid){
+        const client = new RestClient(this.state.user, this.state.password);
         return client.getStudentDetails(studentid).then(subjects => {
+            this.state = {
+                ...this.state,
+                subjects: subjects,
+                marks: subjects.marks
+            };
+            this.emit("change", this.state);
+        })
+    }
+
+    markStudent(){
+        const client = new RestClient(this.state.user, this.state.password);
+        return client.markStudent(this.state.user, this.state.mark, this.state.studentid).then(subjects => {
             this.state = {
                 ...this.state,
                 subjects: subjects
@@ -38,17 +57,38 @@ class Model extends EventEmitter {
         })
     }
 
-    addStudent(studentName, grade) {
-        this.state = {
-            ...this.state,
-            studentId: this.state.studentId + 1,
-            students: this.state.students.concat([{
-                id: this.state.studentId+1,
-                name: studentName,
-                grade: grade
-            }])
-        };
-        this.emit("change", this.state);
+    dismissStudent(studentid){
+        const client = new RestClient(this.state.user, this.state.password);
+        return client.dismissStudent(studentid).then(students => {
+            this.state = {
+                ...this.state,
+                students: students
+            };
+            this.emit("change", this.state);
+        })
+    }
+
+    addPerson(username, password, role) {
+        const client = new RestClient(this.state.user, this.state.password);
+        return client.addPerson(username, password, role).then(students => {
+            this.state = {
+                ...this.state,
+                students: students
+            };
+            this.emit("change", this.state);
+        })
+    }
+
+    filterByName(word){
+        const client = new RestClient(this.state.user, this.state.password);
+        return client.filterByName(word).then(students => {
+            this.state = {
+                ...this.state,
+                students: students
+            };
+            this.emit("change", this.state);
+            console.log(this.state.students)
+        })
     }
 
     changeNewStudentProperty(property, value) {
@@ -62,8 +102,45 @@ class Model extends EventEmitter {
         this.emit("change", this.state);
     }
 
+    getUserType(){
+        for(var i=0;i<this.state.students.length; i++){
+            if(this.state.students[i].username === this.state.user){
+                return this.state.students[i].role;
+            }
+        }
+    }
+
+    addParent(){
+        const client = new RestClient(this.state.user, this.state.password);
+        client.addParent(this.state.parent, this.state.childname);
+    }
+
     setUser(user){
         this.state.user = user;
+    }
+
+    setPassword(password){
+        this.state.password = password;
+    }
+
+    setMark(mark){
+        this.state.mark = mark;
+    }
+
+    setStudentid(id){
+        this.state.studentid = id;
+    }
+
+    setSearchWord(searchWord){
+        this.state.searchWord = searchWord;
+    }
+
+    setParent(parent){
+        this.state.parent = parent;
+    }
+
+    setChildname(name){
+        this.state.childname = name;
     }
 
 }

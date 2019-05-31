@@ -10,13 +10,22 @@ class StudentsListPresenter {
         window.location.assign("#/create-student");
     }
 
-    onFilter() {
-        window.location.assign("#/filter-result");
-    }
-
     onViewDetails(index) {
         window.location.assign("#/student-details/" + index);
         model.getStudentDetails(index);
+    }
+
+    onDismissStudent(studentid){
+        model.dismissStudent(studentid);
+    }
+
+    onAddParent(childname){
+        model.setChildname(childname);
+        window.location.assign("#/add-parent")
+    }
+
+    onMarkStudent(){
+        window.location.assign("#/student-list")
     }
 }
 

@@ -33,11 +33,11 @@ const StudentList = ({ students, onCreateStudent, onViewDetails, onDismissStuden
                             <td>{student.username}</td>
                             <td>{student.role}</td>
                             <td>
+                                <button className="btn btn-warning" onClick={() => {onViewDetails(student.id); model.setStudentid(student.id)}} >View Details</button>
                                 {
-                                    model.getUserType() === "principal" ? <button className="btn btn-secondary" onClick={() => onDismissStudent(student.id)} >Dismiss</button>
+                                    model.getUserType() === "principal" ? <button className="btn btn-danger" onClick={() => onDismissStudent(student.id)} >Dismiss</button>
                                     : <div/>
                                 }
-                                <button className="btn btn-secondary" onClick={() => {onViewDetails(student.id); model.setStudentid(student.id)}} >View Details</button>
                                 {
                                     student.role === "student" && model.getUserType() !== "student" && model.getUserType() !== "parent" ? <button className="btn btn-secondary" onClick={() => onAddParent(student.username)} >Add Parent</button>
                                     : <div/>

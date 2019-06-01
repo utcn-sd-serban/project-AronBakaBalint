@@ -18,7 +18,9 @@ public class StudentDto {
 	private String username;
 	private String password;
 	private String role = "student"; // principal/subject/parent/student
+	private List<String> subjects = new ArrayList<>();
 	private List<String> marks = new ArrayList<>();
+	private List<Integer> averages = new ArrayList<>();
 	
 	public static StudentDto ofEntity(Student student) {
 		StudentDto studentDto = new StudentDto();
@@ -29,10 +31,17 @@ public class StudentDto {
 		if(!CollectionUtils.isEmpty(student.getMarks())) {
 			Map<String, List<Integer>> combinedMarks = combineMarksWithSubjects(student.getMarks());
 			List<String> markList = new ArrayList<>();
+			List<String> subjectList = new ArrayList<>();
+			List<Integer> averageList = new ArrayList<>();
+			
 			combinedMarks.forEach((K,V)->{
-				markList.add(K+": "+V.toString()+" Average: "+calculateAverage(V));
+				subjectList.add(K);
+				markList.add(V.toString());
+				averageList.add(calculateAverage(V));
 			});
 			studentDto.setMarks(markList);
+			studentDto.setAverages(averageList);
+			studentDto.setSubjects(subjectList);
 		}
 		
 		return studentDto;

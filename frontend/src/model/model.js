@@ -10,10 +10,12 @@ class Model extends EventEmitter {
             password: "",
             studentid: "",
             childname: "",
-            subjects: "",
             parent: "",
             marks:[],
+            subjects: [],
+            averages: [],
             students: [],
+            subjectList: [],
             mark: "",
             newStudent: {
                 name: "",
@@ -40,7 +42,9 @@ class Model extends EventEmitter {
             this.state = {
                 ...this.state,
                 subjects: subjects,
-                marks: subjects.marks
+                marks: subjects.marks,
+                averages: subjects.averages,
+                subjectList: subjects.subjects
             };
             this.emit("change", this.state);
         })

@@ -6,7 +6,9 @@ import studentsListPresenter from "../presenter/studentsListPresenter";
 
 const mapModelStateToComponentState = modelState => ({
     subjects: modelState.subjects,
-    marks: modelState.marks
+    marks: modelState.marks,
+    subjectList: modelState.subjectList,
+    averages: modelState.averages
 });
 
 export default class SmartStudentDetails extends Component {
@@ -27,11 +29,15 @@ export default class SmartStudentDetails extends Component {
         model.removeListener("change", this.listener);
     }
 
+
     render() {
+        
         return (
             <StudentDetails
             subjects={this.state.subjects}
             marks={this.state.marks}
+            subjectList={this.state.subjectList}
+            averages={this.state.averages}
             onMarkStudent={studentsListPresenter.onMarkStudent}
             />
         );
